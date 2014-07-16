@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>ASP.NET WebApi: Передача параметров в методы контроллера. Примеры.</title>
+<xmp>
+Здесь используется следующая настройка:
+```immediately
+$.ajaxSetup({
+    cache: false,
+    dataType: 'json',
+    success: function (data) { 
+        console.log(data);
+    }
+});
+```
+
+## Simple Parameters
+
+```button
+$.ajax({
+  type: 'PUT',
+  url: 'api/param/SimpleParams?' + $.param({ id:12, name:'abc' }),
+});
+```
+
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/SimpleParams' + '?id=1&name=111',
+});
+```
+`POST ... 405 (Method Not Allowed)`
+
+```button
+$.ajax({
+  type: 'PUT',
+  url: 'api/param/SimpleParams/13' + '?name=abc',
+});
+```
+
+## By Default Controller Method Supports Post Verb
+
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/ByDefaultMethodSupportsPost'
+});
+```
+
+## Complex Type
+
+### Передача нескольких параметров: один комплексный, остальные простые
+По умолчанию `contentType: 'application/x-www-form-urlencoded; charset=UTF-8'`
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/ComplexType/12?anOption=true',
+  data: { id: 1, title: 'asd', author: { id: 1, name: 'qwe' } }
+});
+```
+
+### contentType = json и необязательные параметры
+Наобязательные параметры `id` и `anOption` не указаны. При использовании `contentType: 'application/json'` тело запроса должно представлять собой json, для этого используется `JSON.stringify`.
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/ComplexType',
+  contentType: 'application/json; charset=utf-8',
+  data: JSON.stringify({ id: 1, title: 'asd', author: { id: 1, name: 'qwe' } })
+});
+```
+
+### PassingList
+Для отладки запроса с помощью WebApiRouteDebugger добавьте заголовок `RouteInspecting: false`
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/PassingList?list[0]=aaa&list[1]=bbb',
+  contentType: 'application/json; charset=utf-8',
+  headers: { RouteInspecting: false }
+});
+```
+Список передать мне не удалось - почему-то в контроллер он приходит пустой.
+
+
+## Binding
+Почему-то биндинг не сработал
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/Binding',
+  data: { id: 1, name: 'qwe' }
+});
+```
+
+## Custom Binder
+```button
+$.ajax({
+  type: 'GET',
+  url: 'api/param/CustomBinder?location={latitude:1,longitude:2}'
+});
+```
+
+## JsonObject and dynamic
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/JsonObject',
+  data: {
+      book: { id: 1, title: 'asd', author: { id: 1, name: 'qwe' } },
+      user: { name: 'rrr' },
+      userToken: 'poi'
+  }
+});
+```
+
+## ManualParametersParsing
+
+```button
+$.ajax({
+  type: 'POST',
+  url: 'api/param/ManualParametersParsing',
+  data: {
+      id: 12,
+      birthDate: '4.05.2014',
+      name: 'asd'
+  }
+});
+```        
+</xmp>
+
+<script src="Scripts/jquery-1.8.3.js"></script>
+<script src="Scripts/Prettify/prettify.js"></script>
+<script src="Scripts/marked.js"></script>
+<script src="App/markedPatch.js"></script>
+<script src="Scripts/strapdown/strapdown.js"></script>
+<link rel="stylesheet" type="text/css" href="App/main.css" />
+</html>

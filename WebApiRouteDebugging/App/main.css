@@ -1,0 +1,9 @@
+﻿div.code {
+  position: relative;
+}
+
+div.code .minibutton {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+}
