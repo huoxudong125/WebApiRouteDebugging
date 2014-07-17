@@ -32,3 +32,11 @@ and situations where the continuous integration build would be modifying the pro
 
 So there is ugly workaround: `Update-Package -Reinstall` as [explained on SO](http://stackoverflow.com/questions/14942374/nuget-package-files-not-being-copied-to-project-content-during-build/24800493).
 
+
+## Used Components & Libs
+
+It's listed in package.config, but most interesting is:
+
+- [strapdown](https://github.com/arturadib/strapdown)
+- [google-code-prettify](https://code.google.com/p/google-code-prettify/)
+- [marked](https://github.com/chjj/marked/)
