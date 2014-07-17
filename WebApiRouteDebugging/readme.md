@@ -5,6 +5,7 @@
 - Open Solution in Visual Studio 2013
 - Within the Visual Studio Solution Explorer right-click on the solution and choose 'Enable NuGet Package Restore'
 - In Package Manager Console run `Update-Package -Reinstall`
+- You're ready to run: Press buttons in browser to send ajax-requests and watch browser's console.
 
 
 ## Where to start
