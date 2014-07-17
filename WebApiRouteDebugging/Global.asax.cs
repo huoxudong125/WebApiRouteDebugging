@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace WebApiRouteDebugging
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiRouteDebuggingApplication : System.Web.HttpApplication
     {
         private void SerializationConfig()
         {
